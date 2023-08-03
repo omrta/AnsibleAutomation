@@ -1,0 +1,17 @@
+--- 
+
+  - hosts: all
+    become: true
+    tasks: 
+
+    - name: Bu görev, apache 2 kaldirilmasini gerceklestirir.
+      apt:
+        name: apache2
+        state: absent  #mevcut olmayan halini getir kaldır demek
+
+
+    - name: Bu görev apache için php kütüphanesinin kaldirilmasi
+      apt:
+        name: libapache2-mod-php
+        state: absent
+  

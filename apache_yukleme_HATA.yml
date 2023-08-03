@@ -1,0 +1,12 @@
+--- 
+
+  - hosts: all
+    become: true
+    tasks: 
+
+    - name: Bu görev, apache 2 yuklemesini gerceklestirir.
+      apt:
+        name: apache2 
+
+
+  

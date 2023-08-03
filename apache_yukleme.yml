@@ -1,0 +1,21 @@
+--- 
+
+  - hosts: all
+    become: true
+    tasks: 
+
+    - name: Bu gorev, apt paket index günceller 
+      apt: 
+        update_cache: yes   #update cache güncellemesini yaparız   
+
+
+    - name: Bu görev, apache 2 yuklemesini gerceklestirir.
+      apt:
+        name: apache2
+        state: latest  #bu şekilde en son sürümü kullanmamızı sağlar
+    - name: Bu görev apache için php kütüphanesinin eklenmesi   
+      apt:
+        name: libapache2-mod-php
+        state: latest #bu şekilde en son sürümü kulllanmamızı sağlar 
+        
+  
