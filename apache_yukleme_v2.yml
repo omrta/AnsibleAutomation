@@ -1,0 +1,15 @@
+--- 
+
+  - hosts: all
+    become: true
+    tasks: 
+##BU görevler ubuntu ve debian tabanlı işletim sistemleri içindir
+    - name: Bu görev Ubuntu Apache &php kütüphane yüklemesi ile birlikte paket günceller  
+      ansible.builtin.package: 
+        name:
+         - "{{ apache_sunucusu }}"
+         - "{{ php_kutuphane }}"
+        state: latest
+        update_cache: yes 
+
+

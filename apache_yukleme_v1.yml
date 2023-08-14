@@ -43,5 +43,4 @@
         state: latest #bu şekilde en son sürümü kulllanmamızı sağlar 
       when: ansible_distribution == "Rocky"  #sadece dağıtımı ubuntu olanlarda çalıştır.
 
-     
   

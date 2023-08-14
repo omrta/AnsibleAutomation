@@ -1,0 +1,45 @@
+--- 
+
+  - hosts: all
+    become: true
+    tasks: 
+
+##Bu görev sunucu güncellemeleri için hazırlanmıştır.
+    - name: Bu görev Ubuntu Linux update & Upgrade işlemlerini gerçekleştirir  
+      ansible.builtin.package: 
+          upgrade: dist
+          update_cache: yes 
+      when: ansible_distribution == "Ubuntu"
+
+##Bu görev  sunucu güncellemeleri için hazırlanmıştır.
+    - name: Bu görev Rocky Linux Update & Upgrade işlemlerini gerçekleştirir   
+      ansible.builtin.package: 
+          update_only: yes
+          update_cache: yes 
+      when: ansible_distribution == "Rocky"
+
+
+##dinamik değişkenler kullanacağız burada 
+# Bu görev ubuntu ve rocky linux için apache ve php kütüphabe yüklemesini gerçekleştirir.
+
+  - hosts: web_sunuculari
+    become: true
+    tasks:
+      
+      - name: İşletim sistemlerini tespit et.
+        debug: var=ansible_os_family
+
+      - name: Dosyalarden değişkenleri oku
+        include_vars: "{{ lookup('first_found',params)}}"
+        vars: 
+          params: 
+            files: 
+              - "vars/apache_{{ ansible_os_family }}.yml"
+              - "vars/apache_varsayilan.yml"
+
+      - name: Bu görev Ubuntu Apache & php kütüphane yuklemesi ile birlikte
+        ansible.builtin.package:
+            name: 
+              - "{{ apache_sunucusu }}"
+              - "{{ php_kutuphane }}"
+            state: latest 

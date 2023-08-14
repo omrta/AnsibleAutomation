@@ -1,0 +1,14 @@
+---
+
+  - hosts: all
+    become: true
+    tasks:
+
+
+    - name: Bu gorev, Rocky Linux Apache & Php Kutuphane yuklemesi ile birlikte update index'ini günceller.
+      dnf:
+        name:
+          - httpd
+          - php
+        update_cache: yes
+      when: ansible_distribution == "Rocky"

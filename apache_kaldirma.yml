@@ -8,6 +8,7 @@
       apt:
         name: apache2
         state: absent  #mevcut olmayan halini getir kaldır demek
+      when: ansible_distribution == "ubuntu"
 
 
     - name: Bu görev apache için php kütüphanesinin kaldirilmasi
